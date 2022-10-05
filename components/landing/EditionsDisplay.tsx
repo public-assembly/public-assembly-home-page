@@ -1,4 +1,4 @@
-import { DropsContractProvider } from "@public-assembly/zora-drops-utils"
+import { DropsContractProvider, addIPFSGateway } from "@public-assembly/zora-drops-utils"
 import { DropsComponents } from "@public-assembly/erc721-drops-minter"
 
 const EDITIONS = [
@@ -16,7 +16,7 @@ export function EditionsDisplay() {
             <div className="w-full relative aspect-video">
               <DropsComponents.Thumbnail style={{width: '100%', height: '100%'}} />
             </div>
-            <div className="flex flex-col gap-1">
+            <div className="flex flex-col">
               <DropsComponents.MetadataName label={false} />
               <DropsComponents.MetadataDescription label={false} />
             </div>
