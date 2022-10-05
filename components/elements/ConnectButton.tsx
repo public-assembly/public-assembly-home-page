@@ -1,5 +1,5 @@
 import { ConnectButton as RKConnectButton } from '@rainbow-me/rainbowkit'
-import { Avatar } from './elements/Avatar'
+import { Avatar } from './Avatar'
 
 export function ConnectButton({ ...props }) {
   return (

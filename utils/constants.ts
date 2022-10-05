@@ -5,9 +5,9 @@
 import { TWITTER_HANDLE } from "./env-vars"
 
 export const entries = {
-  "mirror": 'https://mirror.xyz/',
   "twitter": `https://twitter.com/${TWITTER_HANDLE}`,
-  "discord": 'https://discord.com/'
+  "github": `https://github.com/public-assembly`,
+  "more": `https://www.notion.so/ourzora/Public-Assembly-1243e6a5700f4d0587e63b644bff4197`
 }
 
 /**

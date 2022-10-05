@@ -13,7 +13,6 @@
   "dependencies": {
     "@fontsource/ia-writer-mono": "^4.5.3",
     "@fontsource/inter": "^4.5.12",
-    "@public-assembly/zora-editions-audio-minter": "^0.0.0",
     "@rainbow-me/rainbowkit": "^0.5.0",
     "@zoralabs/nft-drop-contracts": "^1.0.1",
     "ethers": "^5.7.0",

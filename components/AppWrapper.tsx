@@ -17,7 +17,7 @@ const wagmiClient = createClient({
   provider,
 })
 
-export function AppWrapper({ children }: { children: JSX.Element }) {
+export function AppWrapper({ children }: { children: JSX.Element | JSX.Element[] }) {
   return (
     <WagmiConfig client={wagmiClient}>
       <RainbowKitProvider

@@ -785,11 +785,6 @@
   resolved "https://registry.yarnpkg.com/@pedrouid/environment/-/environment-1.0.1.tgz#858f0f8a057340e0b250398b75ead77d6f4342ec"
   integrity sha512-HaW78NszGzRZd9SeoI3JD11JqY+lubnaOx7Pewj5pfjqWXOEATpeKIFb9Z4t2WBUK2iryiXX3lzWwmYWgUL0Ug==
 
-"@public-assembly/zora-editions-audio-minter@^0.0.0":
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/@public-assembly/zora-editions-audio-minter/-/zora-editions-audio-minter-0.0.0.tgz#3f4efd7c4b22fd52000e4b9b4356fde8516b6953"
-  integrity sha512-RZHtA7VflLWyfEiAmrYtNeBf/CXoF9nazywENGMGKhXm01HvjTCp9RnZJuS4I12eluJRmdacmngShe4ktZZ4mw==
-
 "@rainbow-me/rainbowkit@^0.5.0":
   version "0.5.0"
   resolved "https://registry.yarnpkg.com/@rainbow-me/rainbowkit/-/rainbowkit-0.5.0.tgz#6fcb2ec343e789ba1fa260d8bfa36abab2b79a48"
