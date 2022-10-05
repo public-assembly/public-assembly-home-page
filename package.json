@@ -13,9 +13,13 @@
   "dependencies": {
     "@fontsource/ia-writer-mono": "^4.5.3",
     "@fontsource/inter": "^4.5.12",
+    "@public-assembly/erc721-drops-minter": "^0.0.5",
+    "@public-assembly/zora-drops-utils": "^0.1.0",
     "@rainbow-me/rainbowkit": "^0.5.0",
     "@zoralabs/nft-drop-contracts": "^1.0.1",
     "ethers": "^5.7.0",
+    "graphql": "^16.6.0",
+    "graphql-request": "^5.0.0",
     "lodash": "^4.17.21",
     "next": "12.2.5",
     "nextjs-progressbar": "^0.0.14",
