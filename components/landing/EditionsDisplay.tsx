@@ -14,7 +14,7 @@ export function EditionsDisplay() {
         <DropsContractProvider collectionAddress={address} key={address}>
           <div className="grid grid-cols-2 gap-6">
             <div className="w-full relative aspect-video">
-              <DropsComponents.Thumbnail style={{width: '100%', height: '100%'}} />
+              <DropsComponents.VideoRenderer muted autoPlay loop style={{ width: '100%', height: '100%' }}/>
             </div>
             <div className="flex flex-col">
               <DropsComponents.MetadataName label={false} />

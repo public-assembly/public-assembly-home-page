@@ -790,10 +790,10 @@
   resolved "https://registry.yarnpkg.com/@pedrouid/environment/-/environment-1.0.1.tgz#858f0f8a057340e0b250398b75ead77d6f4342ec"
   integrity sha512-HaW78NszGzRZd9SeoI3JD11JqY+lubnaOx7Pewj5pfjqWXOEATpeKIFb9Z4t2WBUK2iryiXX3lzWwmYWgUL0Ug==
 
-"@public-assembly/erc721-drops-minter@^0.0.5":
-  version "0.0.5"
-  resolved "https://registry.yarnpkg.com/@public-assembly/erc721-drops-minter/-/erc721-drops-minter-0.0.5.tgz#8db436b81eb0367af15be662235096e20141c4e9"
-  integrity sha512-cV5U4AI0WK1HZ/gcMWUoWxBZxw0K5kxam4OGBrZ14c8qmNEEUCCpLmOzEd3R9LtaYMHc7ejCBoEa8Fkusjtu7Q==
+"@public-assembly/erc721-drops-minter@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@public-assembly/erc721-drops-minter/-/erc721-drops-minter-0.0.6.tgz#22d6aa6d9dabe71b0e929f4fd56ced3ad5223a3c"
+  integrity sha512-pyQ/ZofYNG0N9imzBn2D718nwD9JMD9AYP98QZ9w8xtEEYD23+MVUmsqyCbS1ypdeDX/oy/npoiXn8GIvgExqw==
   dependencies:
     "@public-assembly/zora-drops-utils" "^0.1.0"
 
