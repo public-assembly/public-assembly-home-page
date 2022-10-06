@@ -22,8 +22,6 @@ export function EditionsDisplay() {
                 <DropsComponents.MetadataDescription label={false} />
                 <DropsComponents.EtherscanLink className="text-underline mr-auto" label='Edition:' truncateAddress />
               </div>
-              {/*<DropsComponents.Inventory label={false} />
-              <DropsComponents.CollectionAddress />*/}
               <MintEdition />
             </div>
           </div>
