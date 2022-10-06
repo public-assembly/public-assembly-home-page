@@ -1,10 +1,10 @@
 import { ConnectButton as RKConnectButton } from '@rainbow-me/rainbowkit'
 import { Avatar } from './Avatar'
 
-export function Connect({ ...props }) {
+export function Connect({ connectCopy, ...props }: {connectCopy?: string}) {
   return (
     <div
-      className="connect-button-wrapper relative flex items-center pr-3 pl-3 py-1.5 rounded-2xl bg-slate-100 overflow-hidden"
+      className="relative"
       {...props}
     >
       <RKConnectButton.Custom>
@@ -13,10 +13,14 @@ export function Connect({ ...props }) {
             <>
               {(() => {
                 if (!mounted || !account || !chain) {
-                  return <button onClick={openConnectModal} className="text-sm">Connect Wallet</button>
+                  return (
+                    <button className="connect__button" onClick={openConnectModal}>
+                      {connectCopy ? connectCopy : 'Connect Wallet'}
+                    </button>
+                  )
                 }
                 if (chain.unsupported) {
-                  return <div className="text-red-400 text-sm">&#x26A0; Wrong Network</div>
+                  return <p>&#x26A0; Wrong Network</p>
                 }
                 return (
                   <button onClick={openAccountModal}>

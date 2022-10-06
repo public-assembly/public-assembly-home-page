@@ -53,3 +53,9 @@ main {
 .pa--hero {
   padding-bottom: var(--header-height);
 }
+
+/* Style Drops UI */
+.drops-ui__mint-button--button,
+.connect__button {
+  @apply w-auto text-underline
+}

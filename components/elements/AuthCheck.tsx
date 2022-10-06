@@ -1,7 +1,7 @@
 import { useAuth } from 'hooks/useAuth'
 import { Connect } from './Connect'
 
-export function AuthCheck({ formUI }: { formUI?: JSX.Element }) {
+export function AuthCheck({ formUI, connectCopy }: { formUI?: JSX.Element, connectCopy?: string }) {
   const { isConnected } = useAuth()
-  return <div className={`ns-surfacePrimary`}>{!isConnected ? <Connect /> : formUI}</div>
+  return <div className={`ns-surfacePrimary`}>{!isConnected ? <Connect connectCopy={connectCopy} /> : formUI}</div>
 }

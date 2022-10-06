@@ -5,7 +5,7 @@ export function DisconnectButton() {
   if (!isConnected) return null
   return (
     <button
-      className="ns-textLight flex items-center border border-white px-4 py-1  hover:text-white"
+      className=" hover:text-[#FF89DE]"
       onClick={() => logout()}>
       Disconnect
     </button>

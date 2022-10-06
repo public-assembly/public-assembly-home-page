@@ -1,4 +1,5 @@
 import { Socials } from "./Socials"
+import { DisconnectButton } from "./elements"
 
 export function Header() {
   return (
@@ -7,6 +8,7 @@ export function Header() {
         <span className="font-bold">{process.env.NEXT_PUBLIC_SITE_TITLE}</span>
         <Socials />
       </div>
+      <DisconnectButton />
     </header>
   )
 }
