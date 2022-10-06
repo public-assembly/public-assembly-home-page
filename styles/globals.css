@@ -59,3 +59,22 @@ main {
 .connect__button {
   @apply w-auto text-underline
 }
+
+@keyframes pulse {
+  from {
+    opacity: .5;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.mint-prompt {
+  position: relative;
+}
+
+.mint-prompt:before {
+  content: '● ';
+  color: #32CD32;
+  animation: pulse infinite 1000ms alternate;
+}

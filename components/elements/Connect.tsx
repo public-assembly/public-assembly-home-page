@@ -1,7 +1,7 @@
 import { ConnectButton as RKConnectButton } from '@rainbow-me/rainbowkit'
 import { Avatar } from './Avatar'
 
-export function Connect({ connectCopy, ...props }: {connectCopy?: string}) {
+export function Connect({ connectCopy, ...props }: {connectCopy?: string | JSX.Element}) {
   return (
     <div
       className="relative"
