@@ -1,6 +1,7 @@
 import { DropsContractProvider } from "@public-assembly/zora-drops-utils"
 import { DropsComponents } from "@public-assembly/erc721-drops-minter"
 import { VideoPlayer } from "./VideoPlayer"
+import { MintEdition } from "./MintEdition"
 
 const EDITIONS = [
   '0x1abb112117822d395c2b147679a9a93273a39255',
@@ -16,10 +17,14 @@ export function EditionsDisplay() {
           <div className="grid grid-cols-2 gap-6">
             <VideoPlayer />
             <div className="flex flex-col">
-              <DropsComponents.MetadataName label={false} />
-              <DropsComponents.MetadataDescription label={false} />
+              <div className="flex flex-col">
+                <DropsComponents.MetadataName label={false} />
+                <DropsComponents.MetadataDescription label={false} />
+                <DropsComponents.EtherscanLink className="text-underline mr-auto" label='Edition:' truncateAddress />
+              </div>
               {/*<DropsComponents.Inventory label={false} />
               <DropsComponents.CollectionAddress />*/}
+              <MintEdition />
             </div>
           </div>
         </DropsContractProvider>
