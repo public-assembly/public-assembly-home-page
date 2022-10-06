@@ -1,2 +1,2 @@
 export * from './Avatar'
-export * from './ConnectButton'
+export * from './Connect'
