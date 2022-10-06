@@ -11,10 +11,10 @@ const EDITIONS = [
 
 export function EditionsDisplay() {
   return (
-    <section id="editions" className='flex flex-col border-t-[1px] border-black gap-12 py-6'>
+    <section id="editions" className='flex flex-col border-t-[1px] border-black gap-12 py-6 pb-20'>
       {EDITIONS.map((address) =>
         <DropsContractProvider collectionAddress={address} key={address}>
-          <div className="grid grid-cols-2 gap-6">
+          <div className="grid md:grid-cols-2 gap-3 md:gap-6">
             <VideoPlayer />
             <div className="flex flex-col">
               <div className="flex flex-col">
@@ -22,8 +22,6 @@ export function EditionsDisplay() {
                 <DropsComponents.MetadataDescription label={false} />
                 <DropsComponents.EtherscanLink className="text-underline mr-auto" label='Edition:' truncateAddress />
               </div>
-              {/*<DropsComponents.Inventory label={false} />
-              <DropsComponents.CollectionAddress />*/}
               <MintEdition />
             </div>
           </div>
