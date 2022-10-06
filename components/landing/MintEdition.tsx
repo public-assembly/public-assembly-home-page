@@ -18,10 +18,13 @@ export function MintEdition() {
       <AuthCheck
         connectCopy={<MintPropmpt />}
         formUI={
-          <div className="flex flex-row gap-2">
-            <DropsComponents.MintButton className="w-auto" />
-            <DropsComponents.TotalPrice label={false} />
-          </div>  
+          <>
+            <div className="flex flex-row gap-2">
+              <DropsComponents.MintButton className="w-auto" />
+              <DropsComponents.TotalPrice label={false} />    
+            </div>
+            <DropsComponents.TxStatus />
+          </>
         }
       />
     </div>
