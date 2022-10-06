@@ -20,6 +20,7 @@ export function EditionsDisplay() {
               <div className="flex flex-col">
                 <DropsComponents.MetadataName label={false} />
                 <DropsComponents.MetadataDescription label={false} />
+                <DropsComponents.EtherscanLink className="text-underline mr-auto" label='Edition:' truncateAddress />
               </div>
               {/*<DropsComponents.Inventory label={false} />
               <DropsComponents.CollectionAddress />*/}
