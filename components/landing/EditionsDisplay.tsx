@@ -4,6 +4,7 @@ import { VideoPlayer } from "./VideoPlayer"
 import { MintEdition } from "./MintEdition"
 
 const EDITIONS = [
+  '0x1bc4822fdd40c679e7d28e1908d84ddc93f1dde7',
   '0x7c143834fa386d874c1b5f43d2f9c7729189e424',
   '0xfbb84248aed12d647d85c016c14def712fc47dc0',
   '0x1abb112117822d395c2b147679a9a93273a39255',
