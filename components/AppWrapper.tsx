@@ -11,10 +11,14 @@ const alchemyID = process.env.NEXT_PUBLIC_ALCHEMY_KEY
 const { chains, provider } = configureChains(
   [chain.mainnet], 
   [
-    alchemyProvider({ apiKey: alchemyID }),
+    alchemyProvider({ 
+      apiKey: alchemyID,
+      priority: 0 
+    }),
     publicProvider()
   ]
 )
+
 const { connectors } = getDefaultWallets({
   appName: 'Public Assembly',
   chains,
