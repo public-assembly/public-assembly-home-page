@@ -13,6 +13,8 @@ export function EditionsDisplay({curationContractAddress}: string) {
     curationContractAddress
   })
 
+  console.log("siteData: ", siteData);
+
   const cleanListings = () => {
     let arrayOfCollections = []
     
