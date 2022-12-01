@@ -1,6 +1,6 @@
 import { useAuth } from 'hooks/useAuth'
 
-export function DisconnectButton() {
+export default function DisconnectButton() {
   const { logout, isConnected } = useAuth()
   if (!isConnected) return null
   return (

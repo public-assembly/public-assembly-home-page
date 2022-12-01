@@ -1,5 +1,4 @@
 // @ts-nocheck
-
 import { DropsContractProvider } from "@public-assembly/zora-drops-utils"
 import { DropsComponents } from "@public-assembly/erc721-drops-minter"
 import { VideoPlayer } from "./VideoPlayer"
@@ -7,7 +6,7 @@ import { MintEdition } from "./MintEdition"
 import { useCurationFunctions } from "@public-assembly/curation-interactions"
 import { useMemo } from "react"
 
-export function EditionsDisplay({curationContractAddress}: string) {
+export default function EditionsDisplay({curationContractAddress}: string) {
 
   const { getListingsReturn: siteData } = useCurationFunctions({
     curationContractAddress
@@ -30,8 +29,6 @@ export function EditionsDisplay({curationContractAddress}: string) {
     () => (siteData ? cleanListings() : []),
     [siteData]
   )
-
-  console.log("finalListings", finalListings)
 
   return (
     <section id="editions" className='flex flex-col border-t-[1px] border-black gap-12 py-6 pb-20'>
