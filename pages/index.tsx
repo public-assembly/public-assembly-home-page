@@ -1,15 +1,17 @@
-// @ts-nocheck
 import type { NextPage } from 'next'
-import { Hero, Seo, EditionsDisplay } from 'components'
+import { Seo } from 'components'
+import dynamic from 'next/dynamic'
 
-const CURATION_CONTRACT: string = "0xbc8db622af59f115cc228dff44d6b17478470ae2"
+const CurrentAuction = dynamic(() => import('./../components/CurrentAuction'), {
+  ssr: false,
+})
 
 const Home: NextPage = () => {
   return (
     <>
       <Seo/>
-      <Hero />
-      <EditionsDisplay curationContractAddress={CURATION_CONTRACT} />
+      {/*<Hero />*/}
+      <CurrentAuction />
     </>
   )
 }
