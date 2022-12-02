@@ -3,11 +3,14 @@ export type ExternalLink = {
   url: string,
 }
 
-export function ExternalLinkList({links}: {links: ExternalLink[]} ) {
+export function ExternalLinkList(
+  {links, gapSpacing}: {links: ExternalLink[], gapSpacing: number}
+) {
+
   return (
-    <div className="flex flex-col gap-2">
+    <div className={`flex flex-col gap-[${gapSpacing}px] text-[14px]`}>
       {links.map((link) =>
-        <a href={link.url} key={link.url} target="_blank" rel="noreferrer">{link.title}</a>
+        <a className="hover:font-bold underline w-fit" href={link.url} key={link.url} target="_blank" rel="noreferrer">{link.title}</a>
       )}
     </div>
   )
