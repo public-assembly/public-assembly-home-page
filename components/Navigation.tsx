@@ -3,6 +3,10 @@ import { useRouter } from 'next/router'
 
 const pages = [
   {
+    slug: '/',
+    title: 'home',
+  },  
+  {
     slug: '/about',
     title: 'about',
   },  
