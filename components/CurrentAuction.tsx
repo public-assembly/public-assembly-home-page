@@ -29,7 +29,9 @@ export default function CurrentAuction() {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
       {auctionData?.tokenId && <TokenThumbnail tokenId={auctionData.tokenId} collectionAddress={COLLECTION_ADDRESS}/>}
       <div className="flex flex-col justify-end gap-10">
-        <a href={`https://nouns.build/dao/${COLLECTION_ADDRESS}`} className="font-bold text-[24px]" target="_blank" rel="noreferrer">Public Assembly #{auctionData?.tokenId}</a>
+        <a href={`https://nouns.build/dao/${COLLECTION_ADDRESS}`} className="font-bold text-[24px] hover:underline" target="_blank" rel="noreferrer">
+          Public Assembly #{auctionData?.tokenId}
+        </a>
         <div className="flex flex-row gap-8">
           {auctionData?.endTime && <AuctionCountdown endTime={auctionData.endTime} />}
           <div className="flex flex-col">
