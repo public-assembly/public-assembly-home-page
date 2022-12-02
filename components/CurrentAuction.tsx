@@ -6,7 +6,7 @@ import { TokenThumbnail } from "./TokenThumbnail"
  * TODO: Grab DAO data
  */
 
-const COLLECTION_ADDRESS = '0x010db87cbf1444b9de89c3cf04297317fb484bfa'
+const COLLECTION_ADDRESS = '0xd2E7684Cf3E2511cc3B4538bB2885Dc206583076'
 
 export default function CurrentAuction() {
   const { activeAuction } = useNounishAuctionQuery({collectionAddress: COLLECTION_ADDRESS})
