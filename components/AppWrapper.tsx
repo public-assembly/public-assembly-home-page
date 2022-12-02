@@ -7,7 +7,7 @@ import { SWRConfig } from 'swr'
 import '@rainbow-me/rainbowkit/styles.css';
 
 const { chains, provider } = configureChains(
-  [chain.mainnet, chain.goerli],
+  [chain.mainnet],
   [
     jsonRpcProvider({
       priority: 0,
