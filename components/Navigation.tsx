@@ -11,8 +11,8 @@ const pages = [
     title: 'about',
   },
   {
-    slug: '/library',
-    title: 'library',
+    slug: '/archive',
+    title: 'archive',
   }  
 ]
 

@@ -1,7 +1,7 @@
 // @ts-nocheck
 import dynamic from 'next/dynamic'
 import type { NextPage } from 'next'
-import { Seo, ExternalLinkList, ExternalLink, CurationContractPlug, CreateWhatsMissingPlug } from 'components'
+import { Seo, ExternalLinkList, ExternalLink, ExternalLinkCard, ExternalCard, CurationContractPlug, CreateWhatsMissingPlug } from 'components'
 
 const READING_LIST_LINKS = [
   {
@@ -58,28 +58,34 @@ const READING_LIST_LINKS = [
   },           
  ] as ExternalLink[]
 
- const ECOSYSTEM_LINKS = [
+ const ECOSYSTEM_CARDS = [
   {
    title: 'Forum',
-   url: 'https://pblcasmbly.discourse.group/'
+   url: 'https://pblcasmbly.discourse.group/',
+   description: "Community hub 1"
   },
+  {
+    title: 'Twitter',
+    url: 'https://twitter.com/pblcasmbly',
+    description: "Community hub 2"   
+  },    
   {
    title: 'Governance Portal',
-   url: 'https://nouns.build'
+   url: 'https://nouns.build',
+   description: "Onchain decisions"   
   },
+
   {
    title: 'Github',
-   url: 'https://github.com/public-assembly'
+   url: 'https://github.com/public-assembly',
+   description: "PA codebase"   
   },
   {
    title: 'Docs',
-   url: 'https://public-assembly-docs.vercel.app/'
-  },
-  {
-   title: 'Twitter',
-   url: 'https://twitter.com/pblcasmbly'
+   url: 'https://public-assembly-docs.vercel.app/',
+   description: "How to Internet"   
   }
- ] as ExternalLink[] 
+ ] as ExternalCard[] 
 
 const About: NextPage = () => {
   
@@ -87,22 +93,25 @@ const About: NextPage = () => {
     <>
       <Seo title="about"/>      
       <div
-        className="text-left mb-8 text-[15px] w-full sm:w-[460px] italic"
+        className="text-left pb-[32px] text-[14px] w-full sm:w-[650px] italic leading-[18px]"
       >
         {`"In contrast to the physical world, only one degree of separation lies between everyone on the internet. This heightened connectivity allows for new models of coordination + creation that are native to the digital realm. Public Assembly will test the best practices for leveraging the unique physics of the internet to create what’s missing as fast as possible."`}
       </div>         
       <div
-        className="mt-8 font-bold text-[20px] pb-[4px]"
+        className="font-bold text-[20px] pb-[9px]"
       >
-        {"Public Conversation"}
+        {"Public Conversations"}
       </div>                
-      <ExternalLinkList links={ECOSYSTEM_LINKS} gapSpacing={4} />        
+      <ExternalLinkCard links={ECOSYSTEM_CARDS} />        
       <div
-        className="mt-8 font-bold text-[20px] pb-[4px]"
+        className="mt-[32px] font-bold text-[20px] pb-[9px]"
       >
         {"Reading List"}
       </div>            
-      <ExternalLinkList links={READING_LIST_LINKS} gapSpacing={4} />                
+      <ExternalLinkList links={READING_LIST_LINKS} gapSpacing={4} />
+      <div className="text-[14px] pb-[20px]">
+        Site maintained by <a href="https://twitter.com/FF89DE" className="hover:font-bold underline">#FF89DE</a>
+      </div>                
     </>
   )
 }

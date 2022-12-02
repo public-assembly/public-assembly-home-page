@@ -9,15 +9,15 @@ const EditionsDisplay = dynamic(() => import('./../components/editions-display/E
 
 const CURATION_CONTRACT: string = "0xbC8DB622af59F115CC228dfF44d6b17478470AE2";
 
-const Library: NextPage = () => {
+const Archive: NextPage = () => {
   
   return (
     <>
       <Seo title="library"/>      
-      <CurationContractPlug curationContractAddress/>
+      {/* <CurationContractPlug curationContractAddress/> */}
       <EditionsDisplay curationContractAddress={CURATION_CONTRACT}  />      
     </>
   )
 }
 
-export default Library
+export default Archive
