@@ -28,7 +28,7 @@ const Ecosystem: NextPage = () => {
   return (
     <>
       <Seo title='Ecosystem'/>
-      <ExternalLinkList links={ECOSYSTEM_LINKS}/>
+      <ExternalLinkList links={ECOSYSTEM_LINKS} gapSpacing={4} />
     </>
   )
 }
