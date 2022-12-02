@@ -2,6 +2,7 @@ import useSWR from 'swr'
 import { NounishAuctionsQuery } from 'types/zora.api.generated'
 import { NOUNISH_AUCTIONS_QUERY } from 'data/nounishAuctions'
 import { zoraApiFetcher } from 'utils/zoraApiFetcher'
+import React from 'react'
 
 /**
  * Using some queries / config from the noun.market codebase:
@@ -15,15 +16,16 @@ export function useNounishAuctionQuery({
   collectionAddress: string
 }) {
   const { data: activeAuction, error } = useSWR<NounishAuctionsQuery>(
-    `nounish-auction-${collectionAddress}`,
+    `pa-auction`,
     async () =>
       zoraApiFetcher(NOUNISH_AUCTIONS_QUERY, {
         collectionAddress,
       }),
-    {
-      refreshInterval: 3000,
-    }
   )
+
+  React.useEffect(() => {
+    console.log('activeAuction', activeAuction)
+  }, [activeAuction])
 
   return {
     activeAuction,

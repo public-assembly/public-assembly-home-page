@@ -20,6 +20,7 @@
     "@zoralabs/nft-drop-contracts": "^1.0.1",
     "@zoralabs/zdk": "^2.2.0",
     "date-fns": "^2.29.3",
+    "dayjs": "^1.11.6",
     "ethers": "^5.7.0",
     "framer-motion": "^7.6.18",
     "graphql": "^16.6.0",

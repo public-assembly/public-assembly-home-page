@@ -16,7 +16,6 @@ export async function zoraApiFetcher(query: DocumentNode, providedVariables?: an
     network: { chain: 'MAINNET', network: 'ETHEREUM' },
     ...providedVariables,
   }
-
   try {
     const response = await client.request(query, variables)
     return response

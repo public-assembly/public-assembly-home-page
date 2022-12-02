@@ -17,7 +17,7 @@ export function Seo({ title, description, url, ogImage }: SeoProps) {
   return (
     <NextHead>
       <meta charSet="UTF-8" />
-      <title>{title ? `${defaultTitle} | ${title}` : defaultTitle}</title>
+      <title>{title ? `${title} | Public Assembly` : defaultTitle}</title>
       <meta name="viewport" content="width=device-width, initial-scale=1" />
       <meta name="description" content={description || defaultDescription} />
       <link rel="icon" type="image/png" sizes="24x24" href={favicon} />

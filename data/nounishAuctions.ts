@@ -18,14 +18,6 @@ export const TOKEN_METADATA_QUERY = gql`
 
 export const NOUNISH_AUCTIONS_QUERY = gql`
   query NounishAuctions($collectionAddress: String!, $network: NetworkInput) {
-    token(
-      token: {address: $collectionAddress, tokenId: "3"}
-    ) {
-      token {
-        description
-        metadata
-      }
-    }
     nouns {
       nounsActiveMarket(
         where: { collectionAddress: $collectionAddress }

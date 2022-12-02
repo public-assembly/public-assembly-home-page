@@ -10,7 +10,6 @@ const EditionsDisplay = dynamic(() => import('./../components/editions-display/E
 const CURATION_CONTRACT: string = "0xbC8DB622af59F115CC228dfF44d6b17478470AE2";
 
 const Archive: NextPage = () => {
-  
   return (
     <>
       <Seo title="library"/>      
