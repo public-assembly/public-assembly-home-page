@@ -13,9 +13,6 @@ export default function CurrentAuction() {
   
   const auctionData = useMemo(() => {
     const data = activeAuction?.nouns?.nounsActiveMarket
-    
-    console.log(data)
-
     return {
       duration: data?.duration,
       endTime: data?.endTime,
@@ -23,7 +20,10 @@ export default function CurrentAuction() {
       highestBidPrice: data?.highestBidPrice?.nativePrice?.decimal,
       tokenId: data?.tokenId
     }
-  }, [activeAuction])
+  }, [
+    activeAuction,
+    activeAuction?.nouns?.nounsActiveMarket?.highestBidPrice?.nativePrice?.decimal
+  ])
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-[1440px]">
@@ -39,12 +39,12 @@ export default function CurrentAuction() {
             </svg>
           </div>
         </a>
-        <div className="flex flex-row gap-8">
-          {auctionData?.endTime && <AuctionCountdown endTime={Number(auctionData.endTime)} />}
+        <div className="flex flex-row gap-10">
           <div className="flex flex-col">
             <span>Current Bid:</span>
             <span>{auctionData?.highestBidPrice} ETH</span>
           </div>
+          {auctionData?.endTime && <AuctionCountdown endTime={Number(auctionData.endTime)} />}
         </div>
       </div>
     </div>
