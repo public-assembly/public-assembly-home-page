@@ -1,12 +1,17 @@
-// @ts-nocheck
 import type { NextPage } from 'next'
-import { Hero, Seo } from 'components'
+import { Seo } from 'components'
+import dynamic from 'next/dynamic'
+
+const CurrentAuction = dynamic(() => import('./../components/CurrentAuction'), {
+  ssr: false,
+})
 
 const Home: NextPage = () => {
   return (
     <>
       <Seo/>
-      <Hero />
+      {/*<Hero />*/}
+      <CurrentAuction />
     </>
   )
 }
