@@ -60,11 +60,11 @@ const READING_LIST_LINKS = [
 
  const ECOSYSTEM_LINKS = [
   {
-   title: 'PA Forum',
+   title: 'Forum',
    url: 'https://pblcasmbly.discourse.group/'
   },
   {
-   title: 'PA Governance Portal',
+   title: 'Governance Portal',
    url: 'https://nouns.build'
   },
   {
