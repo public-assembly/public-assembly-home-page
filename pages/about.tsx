@@ -1,9 +1,9 @@
 // @ts-nocheck
 import dynamic from 'next/dynamic'
 import type { NextPage } from 'next'
-import { Seo, ExternalLinkList, ExternalLink, CurationContractPlug } from 'components'
+import { Seo, ExternalLinkList, ExternalLink, ExternalLinkCard, ExternalCard, CurationContractPlug, CreateWhatsMissingPlug } from 'components'
 
-const ABOUT_LINKS = [
+const READING_LIST_LINKS = [
   {
    title: 'Hyperstructures - Jacob Horne (2021)',
    url: 'https://jacob.energy/hyperstructures.html'
@@ -58,25 +58,60 @@ const ABOUT_LINKS = [
   },           
  ] as ExternalLink[]
 
-const EditionsDisplay = dynamic(() => import('./../components/editions-display/EditionsDisplay'), {
-  ssr: false,
-})
+ const ECOSYSTEM_CARDS = [
+  {
+   title: 'Forum',
+   url: 'https://pblcasmbly.discourse.group/',
+   description: "Community hub 1"
+  },
+  {
+    title: 'Twitter',
+    url: 'https://twitter.com/pblcasmbly',
+    description: "Community hub 2"   
+  },    
+  {
+   title: 'Governance Portal',
+   url: 'https://nouns.build',
+   description: "Onchain decisions"   
+  },
 
-const CURATION_CONTRACT: string = "0xbc8db622af59f115cc228dff44d6b17478470ae2"
+  {
+   title: 'Github',
+   url: 'https://github.com/public-assembly',
+   description: "PA codebase"   
+  },
+  {
+   title: 'Docs',
+   url: 'https://public-assembly-docs.vercel.app/',
+   description: "How to Internet"   
+  }
+ ] as ExternalCard[] 
 
 const About: NextPage = () => {
   
   return (
     <>
-      <Seo title="about"/>
+      <Seo title="about"/>      
       <div
-        className="font-bold text-[20px] pb-[12px]"
+        className="text-left pb-[32px] text-[14px] w-full sm:w-[650px] italic leading-[18px]"
+      >
+        {`"In contrast to the physical world, only one degree of separation lies between everyone on the internet. This heightened connectivity allows for new models of coordination + creation that are native to the digital realm. Public Assembly will test the best practices for leveraging the unique physics of the internet to create what’s missing as fast as possible."`}
+      </div>         
+      <div
+        className="font-bold text-[20px] pb-[9px]"
+      >
+        {"Public Conversations"}
+      </div>                
+      <ExternalLinkCard links={ECOSYSTEM_CARDS} />        
+      <div
+        className="mt-[32px] font-bold text-[20px] pb-[9px]"
       >
         {"Reading List"}
       </div>            
-      <ExternalLinkList links={ABOUT_LINKS} gapSpacing={4} />            
-      <CurationContractPlug />
-      <EditionsDisplay curationContractAddress={CURATION_CONTRACT}  />      
+      <ExternalLinkList links={READING_LIST_LINKS} gapSpacing={4} />
+      <div className="text-[14px] pb-[20px]">
+        Site maintained by <a href="https://twitter.com/FF89DE" className="hover:font-bold underline">#FF89DE</a>
+      </div>                
     </>
   )
 }
