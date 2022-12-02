@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic'
 import type { NextPage } from 'next'
 import { Seo, ExternalLinkList, ExternalLink, CurationContractPlug, CreateWhatsMissingPlug } from 'components'
 
-const READING_LIST_LINKS = [
+const ABOUT_LINKS = [
   {
    title: 'Hyperstructures - Jacob Horne (2021)',
    url: 'https://jacob.energy/hyperstructures.html'
@@ -58,53 +58,33 @@ const READING_LIST_LINKS = [
   },           
  ] as ExternalLink[]
 
- const ECOSYSTEM_LINKS = [
-  {
-   title: 'PA Forum',
-   url: 'https://pblcasmbly.discourse.group/'
-  },
-  {
-   title: 'PA Governance Portal',
-   url: 'https://nouns.build'
-  },
-  {
-   title: 'Github',
-   url: 'https://github.com/public-assembly'
-  },
-  {
-   title: 'Docs',
-   url: 'https://public-assembly-docs.vercel.app/'
-  },
-  {
-   title: 'Twitter',
-   url: 'https://twitter.com/pblcasmbly'
-  }
- ] as ExternalLink[] 
+const EditionsDisplay = dynamic(() => import('./../components/editions-display/EditionsDisplay'), {
+  ssr: false,
+})
 
-const About: NextPage = () => {
+const CURATION_CONTRACT: string = "0xbc8db622af59f115cc228dff44d6b17478470ae2"
+
+const Library: NextPage = () => {
   
   return (
     <>
       <Seo title="about"/>      
+      {/* <CreateWhatsMissingPlug /> */}
       <div
-        className="text-left mb-8 text-[15px] w-full sm:w-[460px] italic"
+        className="text-left mb-8 text-[15px] w-[460px] italic"
       >
         {`"In contrast to the physical world, only one degree of separation lies between everyone on the internet. This heightened connectivity allows for new models of coordination + creation that are native to the digital realm. Public Assembly will test the best practices for leveraging the unique physics of the internet to create what’s missing as fast as possible."`}
       </div>         
       <div
-        className="mt-8 font-bold text-[20px] pb-[4px]"
-      >
-        {"Public Conversation"}
-      </div>                
-      <ExternalLinkList links={ECOSYSTEM_LINKS} gapSpacing={4} />        
-      <div
-        className="mt-8 font-bold text-[20px] pb-[4px]"
+        className="font-bold text-[20px] pb-[12px]"
       >
         {"Reading List"}
       </div>            
-      <ExternalLinkList links={READING_LIST_LINKS} gapSpacing={4} />                
+      <ExternalLinkList links={ABOUT_LINKS} gapSpacing={4} />         
+      {/* <CurationContractPlug /> */}
+      {/* <EditionsDisplay curationContractAddress={CURATION_CONTRACT}  />       */}
     </>
   )
 }
 
-export default About
+export default Library

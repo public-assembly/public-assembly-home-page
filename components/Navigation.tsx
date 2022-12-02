@@ -4,15 +4,11 @@ import { useRouter } from 'next/router'
 const pages = [
   {
     slug: '/',
-    title: 'home',
+    title: 'Public Assembly',
   },  
   {
     slug: '/about',
     title: 'about',
-  },  
-  {
-    slug: '/ecosystem',
-    title: 'ecosystem',
   }
 ]
 
@@ -30,20 +26,12 @@ export function Navigation() {
             <a
               className="hover:underline"
               style={{
-                color: router.asPath === page.slug ? 'black' : 'black', // updated to black due to recent figma change
-                // color: router.asPath === page.slug ? 'var(--pa-pink)' : 'black',
                 fontWeight: router.asPath === page.slug ? 'bold' : 'normal',
               }}>
               {page.title}
             </a>
           </Link>
         ))}
-        <a
-        className="hover:underline"
-        href="https://pblcasmbly.discourse.group/"
-        >
-          forum
-        </a>
       </div>
     </nav>
   )
