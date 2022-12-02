@@ -40,7 +40,7 @@ export default function CurrentAuction() {
           </div>
         </a>
         <div className="flex flex-row gap-8">
-          {auctionData?.endTime && <AuctionCountdown endTime={auctionData.endTime} />}
+          {auctionData?.endTime && <AuctionCountdown endTime={Number(auctionData.endTime)} />}
           <div className="flex flex-col">
             <span>Current Bid:</span>
             <span>{auctionData?.highestBidPrice} ETH</span>
