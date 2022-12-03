@@ -31,15 +31,19 @@ export const NOUNISH_AUCTIONS_QUERY = gql`
         tokenId
         winner
         highestBidPrice {
-          nativePrice {
+          chainTokenPrice {
+            decimal
+            raw
+          }
+          usdcPrice {
             decimal
             raw
           }
         }
         reservePrice {
-          nativePrice {
-            raw
+          chainTokenPrice {
             decimal
+            raw
           }
         }
         startTime
@@ -50,6 +54,7 @@ export const NOUNISH_AUCTIONS_QUERY = gql`
         estimatedDurationTime
         auction
         minBidIncrementPercentage
+        address
       }
     }
   }
