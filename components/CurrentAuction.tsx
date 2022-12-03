@@ -52,8 +52,9 @@ export default function CurrentAuction() {
    */
   const [isSuccess, setIsSuccess] = React.useState(false)
   const [isLoading, setIsLoading] = React.useState(false)
-  const [isError, setIsError] = React.useState(false)
+  // const [isError, setIsError] = React.useState(false)
   const [bidAmount, setBidAmount] = React.useState('0')
+  const [validBid, setValidBid] = React.useState(false)
 
   const { data: signer } = useSigner()
 
@@ -72,6 +73,11 @@ export default function CurrentAuction() {
       let newValue: EthersBN
       try {
         newValue = parseUnits(value, 18)
+        if (value >= auctionData?.minBidAmount) {
+          setValidBid(true)
+        } else {
+          setValidBid(false)
+        }
         const bidString = newValue.toString()
         setBidAmount(bidString)
       } catch (e) {
@@ -79,7 +85,7 @@ export default function CurrentAuction() {
         return
       }
     },
-    [setBidAmount]
+    [setBidAmount, auctionData?.minBidAmount]
   )
 
   const handleOnSubmit = React.useCallback(
@@ -94,7 +100,7 @@ export default function CurrentAuction() {
           console.log({ tx })
           setIsSuccess(true)
         } catch (err: any) {
-          setIsError(err)
+          // setIsError(err)
           console.error(err)
         } finally {
           setIsLoading(false)
@@ -108,7 +114,7 @@ export default function CurrentAuction() {
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-[1440px]">
       {auctionData?.tokenId && <TokenThumbnail tokenId={auctionData.tokenId} collectionAddress={COLLECTION_ADDRESS}/>}
       <div className="flex flex-col justify-end gap-4">
-        <a href={`https://nouns.build/dao/${COLLECTION_ADDRESS}`} className="font-bold text-[24px] hover:underline flex flex-row items-center gap-2" target="_blank" rel="noreferrer">
+        <a href={`https://nouns.build/dao/${COLLECTION_ADDRESS}`} target="_blank" rel="noreferrer" className="font-bold text-[24px] hover:underline flex flex-row items-center gap-2">
           <span>
             Public Assembly #{auctionData?.tokenId}
           </span>
@@ -137,10 +143,14 @@ export default function CurrentAuction() {
                   placeholder={`${auctionData?.minBidAmount} ETH`}
                   onChange={(event: any) => handleOnUpdate(event.target.value)}
                 />
-                <button>Place Bid</button>
+                {!isLoading && !isSuccess
+                  ? <button className={`underline ${!validBid && 'pointer-events-none opacity-20'}`}>Place Bid</button>
+                  : <>
+                      {isLoading && <span>Submitting bid</span>}
+                      {isSuccess && <a href={`https://nouns.build/dao/${COLLECTION_ADDRESS}`} target="_blank" rel="noreferrer">Bid placed: view on nouns.build</a>}
+                    </>
+                }
               </form>
-              {isLoading && <span>Submitting bid</span>}
-              {isSuccess && <span>Bid placed</span>}
             </div>
           }
         />
