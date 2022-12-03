@@ -1,29 +1,108 @@
-import { useEffect, useMemo } from "react"
+import React from "react"
+import { useSigner } from "wagmi"
 import { useNounishAuctionQuery } from "hooks/useNounAuction"
 import AuctionCountdown from "./AuctionCountdown"
 import { TokenThumbnail } from "./TokenThumbnail"
-/**
- * TODO: Grab DAO data
- */
+import { AuthCheck } from "./elements"
+
+import {
+  Auction as AuctionInterface,
+  Auction__factory as BuilderNounsAuction__factory,
+} from '@zoralabs/nouns-protocol/dist/typechain'
+import { BigNumber as EthersBN } from 'ethers'
+import { parseUnits } from '@ethersproject/units'
 
 const COLLECTION_ADDRESS = '0xd2E7684Cf3E2511cc3B4538bB2885Dc206583076'
 
 export default function CurrentAuction() {
   const { activeAuction } = useNounishAuctionQuery({collectionAddress: COLLECTION_ADDRESS})
   
-  const auctionData = useMemo(() => {
+  const auctionData = React.useMemo(() => {
     const data = activeAuction?.nouns?.nounsActiveMarket
+
+    const minBidAmount = () => {
+      if (data?.highestBidPrice?.chainTokenPrice?.decimal && data?.minBidIncrementPercentage) {
+        return (data.highestBidPrice.chainTokenPrice.decimal * (data.minBidIncrementPercentage / 100)) + data.highestBidPrice.chainTokenPrice.decimal
+      } else {
+        /* @ts-ignore */
+        return data?.reservePrice?.chainTokenPrice?.decimal
+      }
+    }
+
     return {
       duration: data?.duration,
       endTime: data?.endTime,
       highestBidder: data?.highestBidder,
-      highestBidPrice: data?.highestBidPrice?.nativePrice?.decimal,
-      tokenId: data?.tokenId
+      highestBidPrice: data?.highestBidPrice?.chainTokenPrice?.decimal,
+      highestBidPriceRaw: data?.highestBidPrice?.chainTokenPrice?.raw,
+      minBidIncrement: data?.minBidIncrementPercentage,
+      minBidAmount: minBidAmount(),
+      /* @ts-ignore */
+      reservePrice: data?.reservePrice?.chainTokenPrice?.raw,
+      tokenId: data?.tokenId,
+      address: data?.address,
     }
   }, [
     activeAuction,
-    activeAuction?.nouns?.nounsActiveMarket?.highestBidPrice?.nativePrice?.decimal
+    activeAuction?.nouns?.nounsActiveMarket?.highestBidPrice?.chainTokenPrice?.decimal
   ])
+
+  /**
+   * Setup auction interactions
+   */
+  const [isSuccess, setIsSuccess] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false)
+  const [isError, setIsError] = React.useState(false)
+  const [bidAmount, setBidAmount] = React.useState('0')
+
+  const { data: signer } = useSigner()
+
+  React.useEffect(() => {
+    if (auctionData.address && signer) {
+      setBuilderNounsAuction(
+        BuilderNounsAuction__factory.connect(auctionData.address, signer)
+      )
+    }
+  }, [auctionData.address, signer])
+
+  const [BuilderNounsAuction, setBuilderNounsAuction] = React.useState<AuctionInterface>()
+
+  const handleOnUpdate = React.useCallback(
+    (value: string) => {
+      let newValue: EthersBN
+      try {
+        newValue = parseUnits(value, 18)
+        const bidString = newValue.toString()
+        setBidAmount(bidString)
+      } catch (e) {
+        console.error(e)
+        return
+      }
+    },
+    [setBidAmount]
+  )
+
+  const handleOnSubmit = React.useCallback(
+    async (event: any) => {
+      if (auctionData?.tokenId) {
+        setIsLoading(true)
+        try {
+          event.preventDefault()
+          const tx = await BuilderNounsAuction?.createBid(auctionData.tokenId, {
+            value: bidAmount,
+          })
+          console.log({ tx })
+          setIsSuccess(true)
+        } catch (err: any) {
+          setIsError(err)
+          console.error(err)
+        } finally {
+          setIsLoading(false)
+        }
+      }
+    },
+    [BuilderNounsAuction, auctionData?.tokenId, bidAmount]
+  )
 
   return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-[1440px]">
@@ -46,6 +125,25 @@ export default function CurrentAuction() {
           </div>
           {auctionData?.endTime && <AuctionCountdown endTime={Number(auctionData.endTime)} />}
         </div>
+        <AuthCheck
+          connectCopy={'Connect to bid'}
+          formUI={
+            <div>
+              <form onSubmit={handleOnSubmit} className="flex flex-row gap-4">
+                <input
+                  className="form-input px-[10px] py-[5px]"
+                  type="text"
+                  pattern="[0-9.]*"
+                  placeholder={`${auctionData?.minBidAmount} ETH`}
+                  onChange={(event: any) => handleOnUpdate(event.target.value)}
+                />
+                <button>Place Bid</button>
+              </form>
+              {isLoading && <span>Submitting bid</span>}
+              {isSuccess && <span>Bid placed</span>}
+            </div>
+          }
+        />
       </div>
     </div>
   )

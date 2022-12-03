@@ -34,12 +34,10 @@ export type ActiveMarket = {
 export type ActiveMarketProperties =
   | LilNounsAuction
   | NounsAuction
-  | NounsBuilderAuction
   | V2Auction
   | V3ReserveAuction
 
 export type ActiveMarketQueryInput = {
-  collectionAddress?: InputMaybe<Scalars['String']>
   marketType: ActiveMarketType
   token?: InputMaybe<TokenInput>
 }
@@ -47,7 +45,6 @@ export type ActiveMarketQueryInput = {
 export enum ActiveMarketType {
   ActiveLilNounsAuction = 'ACTIVE_LIL_NOUNS_AUCTION',
   ActiveNounsAuction = 'ACTIVE_NOUNS_AUCTION',
-  ActiveNounsBuilderAuction = 'ACTIVE_NOUNS_BUILDER_AUCTION',
   ActiveV2Auction = 'ACTIVE_V2_AUCTION',
   ActiveV3ReserveAuction = 'ACTIVE_V3_RESERVE_AUCTION',
 }
@@ -147,7 +144,6 @@ export type Collection = {
   name?: Maybe<Scalars['String']>
   networkInfo: NetworkInfo
   symbol?: Maybe<Scalars['String']>
-  tokenStandard?: Maybe<TokenStandard>
   totalSupply?: Maybe<Scalars['Int']>
 }
 
@@ -406,7 +402,6 @@ export enum MarketCategory {
 export type MarketProperties =
   | LilNounsAuction
   | NounsAuction
-  | NounsBuilderAuction
   | V1Ask
   | V1BidShare
   | V1Offer
@@ -437,7 +432,6 @@ export enum MarketStatus {
 export enum MarketType {
   LilNounsAuction = 'LIL_NOUNS_AUCTION',
   NounsAuction = 'NOUNS_AUCTION',
-  NounsBuilderAuction = 'NOUNS_BUILDER_AUCTION',
   V1Ask = 'V1_ASK',
   V1BidShare = 'V1_BID_SHARE',
   V1Offer = 'V1_OFFER',
@@ -598,7 +592,6 @@ export type NounsNounsEventsArgs = {
 }
 
 export type NounsNounsMarketsArgs = {
-  filter?: InputMaybe<NounsMarketsQueryFilter>
   networks?: InputMaybe<Array<NetworkInput>>
   pagination?: InputMaybe<PaginationInput>
   sort?: InputMaybe<MarketSortKeySortInput>
@@ -706,18 +699,18 @@ export type NounsBuilderAuction = {
   __typename?: 'NounsBuilderAuction'
   address: Scalars['String']
   amount?: Maybe<PriceAtTime>
-  auction?: Maybe<Scalars['String']>
+  auction: Scalars['String']
   collectionAddress: Scalars['String']
   duration: Scalars['String']
   endTime: Scalars['String']
   estimatedDurationTime?: Maybe<Scalars['datetime']>
-  extended?: Maybe<Scalars['Boolean']>
+  extended: Scalars['Boolean']
   firstBidTime?: Maybe<Scalars['datetime']>
-  governor?: Maybe<Scalars['String']>
+  governor: Scalars['String']
   highestBidPrice?: Maybe<PriceAtTime>
   highestBidder?: Maybe<Scalars['String']>
-  manager?: Maybe<Scalars['String']>
-  metadata?: Maybe<Scalars['String']>
+  manager: Scalars['String']
+  metadata: Scalars['String']
   minBidIncrementPercentage?: Maybe<Scalars['Int']>
   networkInfo: NetworkInfo
   reservePrice?: Maybe<PriceAtTime>
@@ -726,7 +719,7 @@ export type NounsBuilderAuction = {
   timeBuffer?: Maybe<Scalars['String']>
   tokenId: Scalars['String']
   transactionInfo: TransactionInfo
-  treasury?: Maybe<Scalars['String']>
+  treasury: Scalars['String']
   winner?: Maybe<Scalars['String']>
 }
 
@@ -958,17 +951,17 @@ export enum NounsBuilderManagerEventType {
 
 export type NounsDao = {
   __typename?: 'NounsDao'
-  auctionAddress?: Maybe<Scalars['String']>
+  auctionAddress: Scalars['String']
   collectionAddress: Scalars['String']
-  contractAddress?: Maybe<Scalars['String']>
+  contractAddress: Scalars['String']
   description?: Maybe<Scalars['String']>
-  governorAddress?: Maybe<Scalars['String']>
-  metadataAddress?: Maybe<Scalars['String']>
+  governorAddress: Scalars['String']
+  metadataAddress: Scalars['String']
   name?: Maybe<Scalars['String']>
   networkInfo: NetworkInfo
   symbol?: Maybe<Scalars['String']>
   totalSupply?: Maybe<Scalars['Int']>
-  treasuryAddress?: Maybe<Scalars['String']>
+  treasuryAddress: Scalars['String']
 }
 
 export type NounsDaoConnection = {
@@ -993,15 +986,11 @@ export type NounsEventConnection = {
 }
 
 export type NounsEventProperties =
-  | LilNounsAuctionEvent
-  | NounsAuctionEvent
   | NounsBuilderAuctionEvent
   | NounsBuilderGovernorEvent
   | NounsBuilderManagerEvent
 
 export enum NounsEventType {
-  LilNounsAuctionEvent = 'LIL_NOUNS_AUCTION_EVENT',
-  NounsAuctionEvent = 'NOUNS_AUCTION_EVENT',
   NounsBuilderAuctionEvent = 'NOUNS_BUILDER_AUCTION_EVENT',
   NounsBuilderGovernorEvent = 'NOUNS_BUILDER_GOVERNOR_EVENT',
   NounsBuilderManagerEvent = 'NOUNS_BUILDER_MANAGER_EVENT',
@@ -1019,17 +1008,6 @@ export type NounsEventsQueryInput = {
   auctionAddresses?: InputMaybe<Array<Scalars['String']>>
   collectionAddresses?: InputMaybe<Array<Scalars['String']>>
   governorAddresses?: InputMaybe<Array<Scalars['String']>>
-}
-
-export enum NounsMarketType {
-  LilNounsAuction = 'LIL_NOUNS_AUCTION',
-  NounsAuction = 'NOUNS_AUCTION',
-  NounsBuilderAuction = 'NOUNS_BUILDER_AUCTION',
-}
-
-export type NounsMarketsQueryFilter = {
-  nounsMarketType?: InputMaybe<NounsMarketType>
-  status?: InputMaybe<MarketStatus>
 }
 
 export type NounsMarketsQueryInput = {
@@ -1296,7 +1274,6 @@ export enum SaleType {
   LilNounsAuctionSale = 'LIL_NOUNS_AUCTION_SALE',
   LooksRareSale = 'LOOKS_RARE_SALE',
   NounsAuctionSale = 'NOUNS_AUCTION_SALE',
-  NounsBuilderAuctionSale = 'NOUNS_BUILDER_AUCTION_SALE',
   OpenseaBundleSale = 'OPENSEA_BUNDLE_SALE',
   OpenseaSingleSale = 'OPENSEA_SINGLE_SALE',
   RaribleSale = 'RARIBLE_SALE',
@@ -1486,7 +1463,6 @@ export type Token = {
   owner?: Maybe<Scalars['String']>
   tokenContract?: Maybe<TokenContract>
   tokenId: Scalars['String']
-  tokenStandard?: Maybe<TokenStandard>
   tokenUrl?: Maybe<Scalars['String']>
   tokenUrlMimeType?: Maybe<Scalars['String']>
 }
@@ -1538,11 +1514,6 @@ export enum TokenSortKey {
   TimedSaleEnding = 'TIMED_SALE_ENDING',
   TokenId = 'TOKEN_ID',
   Transferred = 'TRANSFERRED',
-}
-
-export enum TokenStandard {
-  Erc721 = 'ERC721',
-  Erc1155 = 'ERC1155',
 }
 
 export type TokenWithFullMarketHistory = {
@@ -2071,6 +2042,27 @@ export type VideoEncodingTypes = {
   thumbnail?: Maybe<Scalars['String']>
 }
 
+export type AggStatQueryVariables = Exact<{
+  address: Scalars['String']
+  network: NetworkInput
+}>
+
+export type AggStatQuery = {
+  __typename?: 'RootQuery'
+  aggregateStat: {
+    __typename?: 'AggregateStat'
+    floorPrice?: number | null
+    nftCount: number
+    ownerCount: number
+    salesVolume: {
+      __typename?: 'SalesVolume'
+      chainTokenPrice: number
+      totalCount: number
+      usdcPrice: number
+    }
+  }
+}
+
 export type NounishAuctionsQueryVariables = Exact<{
   collectionAddress: Scalars['String']
   network?: InputMaybe<NetworkInput>
@@ -2082,22 +2074,22 @@ export type NounishAuctionsQuery = {
     __typename?: 'Nouns'
     nounsActiveMarket?: {
       __typename?: 'NounsBuilderAuction'
-      auction?: string | null
+      auction: string
       collectionAddress: string
       duration: string
       endTime: string
       estimatedDurationTime?: any | null
-      extended?: boolean | null
+      extended: boolean
       firstBidTime?: any | null
-      governor?: string | null
-      manager?: string | null
-      metadata?: string | null
+      governor: string
+      manager: string
+      metadata: string
       minBidIncrementPercentage?: number | null
       startTime: string
       status: MarketStatus
       timeBuffer?: string | null
       tokenId: string
-      treasury?: string | null
+      treasury: string
       winner?: string | null
       address: string
       highestBidder?: string | null
@@ -2201,53 +2193,23 @@ export type NounsDaosQuery = {
         __typename?: 'NounsDao'
         name?: string | null
         collectionAddress: string
-        auctionAddress?: string | null
-        governorAddress?: string | null
-        metadataAddress?: string | null
+        auctionAddress: string
+        governorAddress: string
+        metadataAddress: string
         description?: string | null
         symbol?: string | null
         totalSupply?: number | null
-        treasuryAddress?: string | null
-        contractAddress?: string | null
+        treasuryAddress: string
+        contractAddress: string
         networkInfo: { __typename?: 'NetworkInfo'; chain: Chain; network: Network }
       }>
     }
   }
 }
 
-export type OffchainOrderForTokenQueryVariables = Exact<{
-  tokenId: Scalars['String']
-  tokenAddress: Scalars['String']
-}>
-
-export type OffchainOrderForTokenQuery = {
-  __typename?: 'RootQuery'
-  offchainOrders: {
-    __typename?: 'OffchainOrderWithTokenConnection'
-    nodes: Array<{
-      __typename?: 'OffchainOrderWithToken'
-      offchainOrder: {
-        __typename?: 'OffchainOrder'
-        calldata?: string | null
-        contractAddress: string
-        price: {
-          __typename?: 'PriceAtTime'
-          chainTokenPrice?: { __typename?: 'CurrencyAmount'; decimal: number } | null
-          usdcPrice?: { __typename?: 'CurrencyAmount'; decimal: number } | null
-        }
-      }
-      token?: {
-        __typename?: 'Token'
-        collectionName?: string | null
-        tokenId: string
-      } | null
-    }>
-  }
-}
-
 export type OneNounsDaoQueryVariables = Exact<{
   network: NetworkInput
-  collectionAddress: Scalars['String']
+  address: Scalars['String']
 }>
 
 export type OneNounsDaoQuery = {
@@ -2260,14 +2222,14 @@ export type OneNounsDaoQuery = {
         __typename?: 'NounsDao'
         name?: string | null
         collectionAddress: string
-        auctionAddress?: string | null
-        governorAddress?: string | null
-        metadataAddress?: string | null
+        auctionAddress: string
+        governorAddress: string
+        metadataAddress: string
         description?: string | null
         symbol?: string | null
         totalSupply?: number | null
-        treasuryAddress?: string | null
-        contractAddress?: string | null
+        treasuryAddress: string
+        contractAddress: string
         networkInfo: { __typename?: 'NetworkInfo'; chain: Chain; network: Network }
       }>
     }
@@ -2275,7 +2237,7 @@ export type OneNounsDaoQuery = {
 }
 
 export type TokenQueryVariables = Exact<{
-  collectionAddress: Scalars['String']
+  address: Scalars['String']
   tokenId: Scalars['String']
   network?: InputMaybe<NetworkInput>
 }>
