@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { Seo } from 'components'
 import dynamic from 'next/dynamic'
 
-const CurrentAuction = dynamic(() => import('./../components/CurrentAuction'), {
+const CurrentAuction = dynamic(() => import('../@dao-auction/components/CurrentAuction'), {
   ssr: false,
 })
 

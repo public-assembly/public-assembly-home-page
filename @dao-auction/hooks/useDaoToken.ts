@@ -1,8 +1,8 @@
 import useSWR from 'swr'
-import { TOKEN_METADATA_QUERY } from 'data/nounishAuctions'
-import { zoraApiFetcher } from 'utils/zoraApiFetcher'
+import { DAO_TOKEN_QUERY } from '../data/daoTokenQuery'
+import { zoraApiFetcher } from '@dao-auction/lib/zoraApiFetcher'
 
-export function useToken({
+export function useDaoToken({
   collectionAddress,
   tokenId,
 }: {
@@ -12,7 +12,7 @@ export function useToken({
   const { data: tokenData, error } = useSWR<any>(
     `token-metadata-${collectionAddress}-${tokenId}`,
       async () =>
-      zoraApiFetcher(TOKEN_METADATA_QUERY, {
+      zoraApiFetcher(DAO_TOKEN_QUERY, {
         collectionAddress,
         tokenId,
       }),

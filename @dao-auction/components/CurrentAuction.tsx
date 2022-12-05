@@ -1,9 +1,9 @@
 import React from "react"
 import { useSigner } from "wagmi"
-import { useNounishAuctionQuery } from "hooks/useNounAuction"
+import { useDaoAuctionQuery } from "@dao-auction/hooks/useDaoAuctionQuery"
 import AuctionCountdown from "./AuctionCountdown"
 import { TokenThumbnail } from "./TokenThumbnail"
-import { AuthCheck } from "./elements"
+import { AuthCheck } from "../../components/elements"
 
 import {
   Auction as AuctionInterface,
@@ -15,7 +15,7 @@ import { parseUnits } from '@ethersproject/units'
 const COLLECTION_ADDRESS = '0xd2E7684Cf3E2511cc3B4538bB2885Dc206583076'
 
 export default function CurrentAuction() {
-  const { activeAuction } = useNounishAuctionQuery({collectionAddress: COLLECTION_ADDRESS})
+  const { activeAuction } = useDaoAuctionQuery({collectionAddress: COLLECTION_ADDRESS})
   
   const auctionData = React.useMemo(() => {
     const data = activeAuction?.nouns?.nounsActiveMarket
