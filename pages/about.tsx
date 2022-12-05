@@ -71,7 +71,7 @@ const READING_LIST_LINKS = [
   },    
   {
    title: 'Governance Portal',
-   url: 'https://nouns.build',
+   url: 'https://nouns.build/dao/0xd2e7684cf3e2511cc3b4538bb2885dc206583076',
    description: "Onchain decisions"   
   },
 
