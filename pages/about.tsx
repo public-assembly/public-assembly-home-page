@@ -93,7 +93,7 @@ const About: NextPage = () => {
     <>
       <Seo title="about"/>      
       <div
-        className="text-left pb-[32px] text-[14px] w-full sm:w-[650px] italic leading-[18px]"
+        className="text-left pb-[32px] text-[16px] w-full sm:w-[650px] italic leading-[18px]"
       >
         {`"In contrast to the physical world, only one degree of separation lies between everyone on the internet. This heightened connectivity allows for new models of coordination + creation that are native to the digital realm. Public Assembly will test the best practices for leveraging the unique physics of the internet to create what’s missing as fast as possible."`}
       </div>         
