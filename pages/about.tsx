@@ -82,8 +82,8 @@ const READING_LIST_LINKS = [
   },
   {
    title: 'Docs',
-   url: 'https://public-assembly-docs.vercel.app/',
-   description: "How to Internet"   
+   url: 'https://docs.public---assembly.com/',
+   description: "User documentation"   
   }
  ] as ExternalCard[] 
 
