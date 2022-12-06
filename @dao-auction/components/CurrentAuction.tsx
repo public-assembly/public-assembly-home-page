@@ -1,9 +1,9 @@
 import React from "react"
 import { useSigner } from "wagmi"
-import { useNounishAuctionQuery } from "hooks/useNounAuction"
+import { useDaoAuctionQuery } from "@dao-auction/hooks/useDaoAuctionQuery"
 import AuctionCountdown from "./AuctionCountdown"
 import { TokenThumbnail } from "./TokenThumbnail"
-import { AuthCheck } from "./elements"
+import { AuthCheck } from "../../components/elements"
 
 import {
   Auction as AuctionInterface,
@@ -12,10 +12,15 @@ import {
 import { BigNumber as EthersBN } from 'ethers'
 import { parseUnits } from '@ethersproject/units'
 
-const COLLECTION_ADDRESS = '0xd2E7684Cf3E2511cc3B4538bB2885Dc206583076'
+export interface CurrentAuctionProps extends React.HTMLProps<HTMLDivElement> {
+  /**
+   * Nounish NFT Contract address
+   */
+  daoAddress: string
+}
 
-export default function CurrentAuction() {
-  const { activeAuction } = useNounishAuctionQuery({collectionAddress: COLLECTION_ADDRESS})
+export default function CurrentAuction({daoAddress, ...props}: CurrentAuctionProps) {
+  const { activeAuction } = useDaoAuctionQuery({collectionAddress: daoAddress})
   
   const auctionData = React.useMemo(() => {
     const data = activeAuction?.nouns?.nounsActiveMarket
@@ -111,10 +116,10 @@ export default function CurrentAuction() {
   )
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-[1440px]">
-      {auctionData?.tokenId && <TokenThumbnail tokenId={auctionData.tokenId} collectionAddress={COLLECTION_ADDRESS}/>}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 max-w-[1440px]" {...props}>
+      {auctionData?.tokenId && <TokenThumbnail tokenId={auctionData.tokenId} collectionAddress={daoAddress}/>}
       <div className="flex flex-col justify-end gap-4">
-        <a href={`https://nouns.build/dao/${COLLECTION_ADDRESS}`} target="_blank" rel="noreferrer" className="font-bold text-[24px] hover:underline flex flex-row items-center gap-2">
+        <a href={`https://nouns.build/dao/${daoAddress}`} target="_blank" rel="noreferrer" className="font-bold text-[24px] hover:underline flex flex-row items-center gap-2">
           <span>
             Public Assembly #{auctionData?.tokenId}
           </span>
@@ -147,7 +152,7 @@ export default function CurrentAuction() {
                   ? <button className={`underline ${!validBid && 'pointer-events-none opacity-20'}`}>Place Bid</button>
                   : <>
                       {isLoading && <span>Submitting bid</span>}
-                      {isSuccess && <a href={`https://nouns.build/dao/${COLLECTION_ADDRESS}`} target="_blank" rel="noreferrer">Bid placed: view on nouns.build</a>}
+                      {isSuccess && <a href={`https://nouns.build/dao/${daoAddress}`} target="_blank" rel="noreferrer">Bid placed: view on nouns.build</a>}
                     </>
                 }
               </form>
