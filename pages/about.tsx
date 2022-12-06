@@ -87,32 +87,25 @@ const READING_LIST_LINKS = [
   }
  ] as ExternalCard[] 
 
-const About: NextPage = () => {
-  
+const About: NextPage = () => { 
   return (
-    <>
-      <Seo title="about"/>      
-      <div
-        className="text-left pb-[32px] text-[16px] w-full sm:w-[650px] italic leading-[18px]"
-      >
-        {`"In contrast to the physical world, only one degree of separation lies between everyone on the internet. This heightened connectivity allows for new models of coordination + creation that are native to the digital realm. Public Assembly will test the best practices for leveraging the unique physics of the internet to create what’s missing as fast as possible."`}
-      </div>         
-      <div
-        className="font-bold text-[20px] pb-[9px]"
-      >
-        {"Public Conversations"}
-      </div>                
+    <article className="max-w-[650px] w-full">
+      <Seo title="about"/>
+      <p className="text-left pb-[32px] text-[16px] italic leading-[18px]">
+        In contrast to the physical world, only one degree of separation lies between everyone on the internet. This heightened connectivity allows for new models of coordination + creation that are native to the digital realm. Public Assembly will test the best practices for leveraging the unique physics of the internet to create what’s missing as fast as possible.
+      </p>         
+      <h2 className="font-bold text-[20px] pb-[9px]">
+        Public Conversations
+      </h2>                
       <ExternalLinkCard links={ECOSYSTEM_CARDS} />        
-      <div
-        className="mt-[32px] font-bold text-[20px] pb-[9px]"
-      >
-        {"Reading List"}
-      </div>            
-      <ExternalLinkList links={READING_LIST_LINKS} gapSpacing={4} />
-      <div className="text-[14px] pb-[20px]">
+      <h2 className="mt-[32px] font-bold text-[20px] pb-[9px]">
+        Reading List
+      </h2>            
+      <ExternalLinkList links={READING_LIST_LINKS} />
+      <h5 className="text-[14px] pb-[20px]">
         Site maintained by <a href="https://twitter.com/FF89DE" className="hover:font-bold underline">#FF89DE</a>
-      </div>                
-    </>
+      </h5>
+    </article>
   )
 }
 
