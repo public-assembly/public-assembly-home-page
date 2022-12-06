@@ -10,8 +10,9 @@ const Home: NextPage = () => {
   return (
     <>
       <Seo/>
-      {/*<Hero />*/}
-      <CurrentAuction />
+      <section id="current-auction" className="pb-6">
+        <CurrentAuction daoAddress='0xd2E7684Cf3E2511cc3B4538bB2885Dc206583076' />
+      </section>
     </>
   )
 }

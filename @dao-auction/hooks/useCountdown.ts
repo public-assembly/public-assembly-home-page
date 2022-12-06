@@ -1,5 +1,6 @@
-import dayjs from 'dayjs'
-import { useEffect, useState } from 'react'
+import * as React from 'react'
+import { intervalToDuration, getUnixTime } from 'date-fns'
+import { useInterval } from './useInterval'
 
 interface Countdown {
   isEnded: boolean
@@ -7,23 +8,22 @@ interface Countdown {
 }
 
 export const useCountdown = (endTime: number): Countdown => {
-  const [now, setNow] = useState(dayjs.unix(Date.now() / 1000))
+  const [now, setNow] = React.useState(getUnixTime(Date.now() * 1000))
+  const [end, setEnd] = React.useState(endTime * 1000)
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setNow(dayjs.unix(Date.now() / 1000))
-    }, 1000)
+  useInterval(() => {
+    setNow(getUnixTime(Date.now() * 1000))
+    setEnd(endTime * 1000)
+  }, 1000)
 
-    return () => clearInterval(interval)
-  }, [])
-
-  const end = dayjs.unix(endTime)
-  const countdown = end.diff(now, 'second')
+  const countdownString = React.useMemo(() => {
+    const difference = Math.abs(end - now)
+    const { days, hours, minutes, seconds } = intervalToDuration({ start: 0, end: difference })
+    return `${days && days > 0 ? days + 'd ' : ''}${hours}h ${minutes}m ${seconds}s`
+  }, [now])
 
   return {
     isEnded: now >= end,
-    countdownString: `${Math.floor(countdown / 3600)}h ${Math.floor(
-      (countdown % 3600) / 60
-    )}m ${countdown % 60}s`,
+    countdownString,
   }
 }
