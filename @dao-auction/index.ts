@@ -1,4 +1,5 @@
 import CurrentAuction from "./components/CurrentAuction";
+import TokenExplorer from './components/TokenExplorer'
 import {
   useCountdown,
   useDaoAuctionQuery,
@@ -7,6 +8,7 @@ import {
 
 export {
   CurrentAuction,
+  TokenExplorer,
   useCountdown,
   useDaoAuctionQuery,
   useDaoToken,

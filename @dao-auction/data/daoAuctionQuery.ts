@@ -1,11 +1,10 @@
 import gql from 'graphql-tag'
 
 export const DAO_AUCTION_QUERY = gql`
-  query NounishAuctions($collectionAddress: String!, $network: NetworkInput) {
+  query NounishAuctions($collectionAddress: String!) {
     nouns {
       nounsActiveMarket(
         where: { collectionAddress: $collectionAddress }
-        network: $network
       ) {
         duration
         endTime

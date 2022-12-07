@@ -41,7 +41,7 @@ export default function CurrentAuction({daoAddress, ...props}: CurrentAuctionPro
             </svg>
           </div>
         </a>
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-2">
           <div className="flex flex-row gap-10">
             <div className="flex flex-col">
               <span>Current Bid:</span>

@@ -6,8 +6,9 @@ export const DAO_TOKEN_QUERY = gql`
       token: {address: $collectionAddress, tokenId: $tokenId}
     ) {
       token {
-        description
         metadata
+        owner
+        lastRefreshTime
       }
     }
   }

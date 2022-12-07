@@ -2,11 +2,13 @@ import * as React from 'react'
 import { useDaoAuctionQuery } from './useDaoAuctionQuery'
 import {
   Auction as AuctionInterface,
-  Auction__factory as BuilderNounsAuction__factory
+  Auction__factory as BuilderNounsAuction__factory,
+  Token as TokenInterface,
 } from '@zoralabs/nouns-protocol/dist/typechain'
 import { BigNumber as EthersBN, ContractTransaction } from 'ethers'
 import { parseUnits } from '@ethersproject/units'
-import { useSigner, useEnsName } from "wagmi"
+import { useEnsName } from "wagmi"
+import { useNounsProtocol } from './useNounsProtocol'
 
 export function useActiveAuction(
   /**
@@ -14,7 +16,7 @@ export function useActiveAuction(
    */
   daoAddress: string
 ) {
-  const { activeAuction } = useDaoAuctionQuery({collectionAddress: daoAddress})
+  const { activeAuction } = useDaoAuctionQuery({ collectionAddress: daoAddress })
   
   const { data: ensName } = useEnsName({
     address: activeAuction?.nouns?.nounsActiveMarket?.highestBidder as string | undefined,
@@ -38,6 +40,7 @@ export function useActiveAuction(
     return {
       tokenId: data?.tokenId,
       address: data?.address,
+      metadata: data?.metadata,
       duration: data?.duration,
       endTime: data?.endTime,
       highestBidder: data?.highestBidder,
@@ -54,10 +57,26 @@ export function useActiveAuction(
     activeAuction?.nouns?.nounsActiveMarket?.highestBidPrice?.chainTokenPrice?.decimal
   ])
 
-  /**
-   * Setup auction interactions
-   */
+  const { BuilderAuction, BuilderToken} = useNounsProtocol({
+    daoAddress: daoAddress,
+    auctionAddress: auctionData?.address,
+    metadataRendererAddress: auctionData?.metadata
+  })
   
+  const [totalSupply, setTotalSupply] = React.useState<number | undefined>()
+
+  React.useEffect(() => {
+    async function getSupply() {
+      try {
+        const supply = await BuilderToken?.totalSupply()
+        setTotalSupply(supply?.toNumber())
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    getSupply()
+  }, [BuilderToken, auctionData?.tokenId])
+
   const [createBidSuccess, setCreateBidSuccess] = React.useState(false)
   const [createBidLoading, setCreateBidLoading] = React.useState(false)
   const [createBidError, setCreateBidError] = React.useState(false)
@@ -66,18 +85,6 @@ export function useActiveAuction(
   
   const [bidAmount, setBidAmount] = React.useState('0')
  
-  const { data: signer } = useSigner()
- 
-  React.useEffect(() => {
-    if (auctionData.address && signer) {
-      setBuilderNounsAuction(
-        BuilderNounsAuction__factory.connect(auctionData.address, signer)
-      )
-    }
-  }, [auctionData.address, signer])
-
-  const [BuilderNounsAuction, setBuilderNounsAuction] = React.useState<AuctionInterface>()
-
   const updateBidAmount = React.useCallback(
     (value: string) => {
       let newValue: EthersBN
@@ -104,7 +111,7 @@ export function useActiveAuction(
       if (auctionData?.tokenId) {
         setCreateBidLoading(true)
         try {
-          const tx = await BuilderNounsAuction?.createBid(auctionData.tokenId, {
+          const tx = await BuilderAuction?.createBid(auctionData.tokenId, {
             value: bidAmount,
           })
           setCreateBidTx(tx)
@@ -117,7 +124,7 @@ export function useActiveAuction(
         }
       }
     },
-    [BuilderNounsAuction, auctionData?.tokenId, bidAmount]
+    [BuilderAuction, auctionData?.tokenId, bidAmount]
   )
 
   return {
@@ -128,6 +135,7 @@ export function useActiveAuction(
     createBidError,
     createBidLoading,
     createBidTx,
-    auctionData
+    auctionData,
+    totalSupply,
   }
 }
