@@ -1,14 +1,27 @@
 import React from 'react'
 import { useActiveAuction } from "../hooks/useActiveAuction"
+import CurrentAuction from './CurrentAuction'
 
 export interface TokenExplorerProps extends React.HTMLProps<HTMLDivElement> {
   /**
    * Nounish NFT Contract address
    */
   daoAddress: string
+  /**
+   * Renderer Component for current auction
+   */
+  auctionRenderer?: React.ReactNode
+  /**
+   * Renderer Component for dao tokens
+   */
+  tokenRenderer?: React.ReactNode
 }
 
-export default function TokenPagination({daoAddress, ...props}: TokenExplorerProps) {
+export default function TokenPagination({
+  daoAddress,
+  auctionRenderer,
+  ...props
+}: TokenExplorerProps) {
   const { totalSupply } = useActiveAuction(daoAddress)
   
   const [tokenId, setTokenId] = React.useState(0)
@@ -36,6 +49,10 @@ export default function TokenPagination({daoAddress, ...props}: TokenExplorerPro
       <button onClick={decrementId}>-</button>
       {tokenId}
       <button onClick={incrementId}>+</button>
+      {tokenId === totalSupply - 1
+        ? <>{auctionRenderer || <CurrentAuction daoAddress={daoAddress} />}</>
+        : <div>Other token</div>
+      }
     </div>
   )
 }
