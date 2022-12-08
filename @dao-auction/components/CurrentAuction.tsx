@@ -34,13 +34,13 @@ export default function CurrentAuction({daoAddress, ...props}: CurrentAuctionPro
       {auctionData?.tokenId &&
         <TokenThumbnail
           tokenId={auctionData.tokenId}
-          collectionAddress={daoAddress}
+          daoAddress={daoAddress}
         />
       }
       <div className="flex flex-col justify-end gap-4">
         {totalSupply &&
           <TokenTitle
-            collectionAddress={daoAddress}
+            daoAddress={daoAddress}
             tokenId={(totalSupply - 1).toString()}
           />
         }

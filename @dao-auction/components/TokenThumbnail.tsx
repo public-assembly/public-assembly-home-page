@@ -3,15 +3,15 @@ import { useDaoToken } from "@dao-auction/hooks/useDaoToken"
 
 export default function TokenThumbnail({
   tokenId,
-  collectionAddress,
+  daoAddress,
 }: {
-  collectionAddress: string
+  daoAddress: string
   tokenId: string
 }) {
   const [thumbnail, setThumbnail] = React.useState<undefined | string>()
   
-  const {tokenData} = useDaoToken({
-    collectionAddress: collectionAddress,
+  const { tokenData } = useDaoToken({
+    daoAddress: daoAddress,
     tokenId: tokenId,
   })
 

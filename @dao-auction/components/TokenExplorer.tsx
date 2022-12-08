@@ -1,6 +1,7 @@
 import React from 'react'
 import { useActiveAuction } from "../hooks/useActiveAuction"
 import CurrentAuction from './CurrentAuction'
+import TokenRenderer from './TokenRenderer'
 
 export interface TokenExplorerProps extends React.HTMLProps<HTMLDivElement> {
   /**
@@ -51,7 +52,7 @@ export default function TokenPagination({
       <button onClick={incrementId}>+</button>
       {tokenId === totalSupply - 1
         ? <>{auctionRenderer || <CurrentAuction daoAddress={daoAddress} />}</>
-        : <div>Other token</div>
+        : <TokenRenderer daoAddress={daoAddress} tokenId={tokenId?.toString()!} />
       }
     </div>
   )

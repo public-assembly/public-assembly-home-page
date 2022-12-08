@@ -1,10 +1,5 @@
 import * as React from 'react'
 import { useDaoAuctionQuery } from './useDaoAuctionQuery'
-import {
-  Auction as AuctionInterface,
-  Auction__factory as BuilderNounsAuction__factory,
-  Token as TokenInterface,
-} from '@zoralabs/nouns-protocol/dist/typechain'
 import { BigNumber as EthersBN, ContractTransaction } from 'ethers'
 import { parseUnits } from '@ethersproject/units'
 import { useEnsName } from "wagmi"

@@ -18,22 +18,27 @@ export type TokenData = {
     /**
      * Properties may be undefined, otherwise denotes the layer variants of the image.
      */
-    properties?: {}[];
+    properties: {}[];
+  };
+  mintInfo: {
+    mintContext: {
+      blockNumber: number
+    }
   };
 }
 
 export function useDaoToken({
-  collectionAddress,
+  daoAddress,
   tokenId,
 }: {
-  collectionAddress: string
+  daoAddress: string
   tokenId: string
 }) {
   const { data: tokenData, error } = useSWR<any>(
-    `token-metadata-${collectionAddress}-${tokenId}`,
+    `token-metadata-${daoAddress}-${tokenId}`,
       async () =>
       zoraApiFetcher(DAO_TOKEN_QUERY, {
-        collectionAddress,
+        daoAddress,
         tokenId,
       }),
     {

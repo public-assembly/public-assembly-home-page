@@ -3,10 +3,10 @@ import { useDaoToken } from "@dao-auction/hooks/useDaoToken"
 
 export default function TokenTitle({
   tokenId,
-  collectionAddress,
+  daoAddress,
   externalLinkBaseURI = 'https://nouns.build/dao'
 }: {
-  collectionAddress: string
+  daoAddress: string
   tokenId: string
   /**
    * External link base url
@@ -14,13 +14,13 @@ export default function TokenTitle({
    */
    externalLinkBaseURI?: string
 }) {
-  const {tokenData} = useDaoToken({
-    collectionAddress: collectionAddress,
+  const { tokenData } = useDaoToken({
+    daoAddress: daoAddress,
     tokenId: tokenId,
   })
   
   return (
-    <a href={`${externalLinkBaseURI}/${collectionAddress}/${tokenId}`} target="_blank" rel="noreferrer" className="font-bold text-[24px] hover:underline flex flex-row items-center gap-2">
+    <a href={`${externalLinkBaseURI}/${daoAddress}/${tokenId}`} target="_blank" rel="noreferrer" className="font-bold text-[24px] hover:underline flex flex-row items-center gap-2">
       <span>
         {tokenData?.metadata?.name}
       </span>
