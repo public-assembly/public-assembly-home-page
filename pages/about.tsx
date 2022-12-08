@@ -61,7 +61,7 @@ const READING_LIST_LINKS = [
  const ECOSYSTEM_CARDS = [
   {
    title: 'Forum',
-   url: 'https://pblcasmbly.discourse.group/',
+   url: 'https://forum.public---assembly.com/',
    description: "Community hub 1"
   },
   {
