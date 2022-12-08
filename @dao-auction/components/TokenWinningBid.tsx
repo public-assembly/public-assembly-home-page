@@ -61,6 +61,10 @@ export default function TokenWinningBid({
           }
         }
       } catch (err) {
+        /**
+         * Short circuit the async call:
+         * https://stackoverflow.com/questions/37624144/is-there-a-way-to-short-circuit-async-await-flow
+         */
         console.error(err)
       }
     }
