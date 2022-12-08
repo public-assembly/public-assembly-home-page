@@ -1,7 +1,7 @@
 import React from 'react'
 import { useDaoToken } from "@dao-auction/hooks/useDaoToken"
 
-export function TokenThumbnail({
+export default function TokenThumbnail({
   tokenId,
   collectionAddress,
 }: {
@@ -16,7 +16,7 @@ export function TokenThumbnail({
   })
 
   React.useEffect(() => {
-    const image = tokenData?.token?.token?.metadata?.image
+    const image = tokenData?.metadata?.image
     if (image) {
       setThumbnail(image)
     }
