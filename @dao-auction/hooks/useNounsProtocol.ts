@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { useSigner } from "wagmi"
-
+import { useSigner, useProvider } from "wagmi"
+import { ethers } from 'ethers'
 import {
   Auction as AuctionInterface,
   Auction__factory,
@@ -35,24 +35,27 @@ export function useNounsProtocol({
   const [BuilderTokenMetadata, setBuilderTokenMetadata] = React.useState<MetadataRendererInterface>()
 
   const { data: signer } = useSigner()
+  const provider = useProvider()
 
   React.useEffect(() => {
-    if (metadataRendererAddress && signer) {
+    if (metadataRendererAddress) {
       setBuilderTokenMetadata(
-        MetadataRenderer__factory.connect(metadataRendererAddress, signer)
+        MetadataRenderer__factory.connect(metadataRendererAddress, signer || provider)
       )
     }
-    if (daoAddress && signer) {
+    if (daoAddress) {
       setBuilderToken(
-        Token__factory.connect(daoAddress, signer)
+        Token__factory.connect(daoAddress, signer || provider)
       )
     }
-    if (auctionAddress && signer) {
+    if (auctionAddress) {
       setBuilderAuction(
-        Auction__factory.connect(auctionAddress, signer)
+        Auction__factory.connect(auctionAddress, signer || provider)
       )
     }
   }, [auctionAddress, daoAddress, signer])
+
+  React.useEffect(() => {console.log(BuilderAuction?.callStatic.auction())}, [BuilderAuction])
 
   return {
     BuilderAuction,

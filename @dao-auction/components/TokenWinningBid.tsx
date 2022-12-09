@@ -30,14 +30,14 @@ export default function TokenWinningBid({
     async function getBids() {
       try {
         if(tokenData?.mintInfo?.mintContext?.blockNumber) {
-          /** 
+          /**
            * https://docs.ethers.io/v5/api/contract/contract/#Contract-queryFilter
            * Used to query the Auction events exposed below:
            * https://github.com/ourzora/nouns-protocol/blob/main/src/auction/IAuction.sol#L16-L22
            */
           const bids = await BuilderAuction?.queryFilter(
             'AuctionBid' as any,
-            tokenData?.mintInfo?.mintContext?.blockNumber,
+            0,
             'latest'
           )
           if (bids) {
@@ -50,6 +50,8 @@ export default function TokenWinningBid({
               }
             })
             
+            console.log(auctionEventsArray)
+
             const tokenEvents = auctionEventsArray?.filter(token => token?.id === Number(tokenId))
 
             if (tokenEvents?.length) {
