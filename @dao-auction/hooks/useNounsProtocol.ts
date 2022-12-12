@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { useSigner, useProvider } from "wagmi"
-import { ethers } from 'ethers'
 import {
   Auction as AuctionInterface,
   Auction__factory,
@@ -53,9 +52,7 @@ export function useNounsProtocol({
         Auction__factory.connect(auctionAddress, signer || provider)
       )
     }
-  }, [auctionAddress, daoAddress, signer])
-
-  React.useEffect(() => {console.log(BuilderAuction?.callStatic.auction())}, [BuilderAuction])
+  }, [auctionAddress, daoAddress, signer, provider])
 
   return {
     BuilderAuction,

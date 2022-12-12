@@ -37,8 +37,8 @@ export default function TokenWinningBid({
            */
           const bids = await BuilderAuction?.queryFilter(
             'AuctionBid' as any,
-            0,
-            'latest'
+            tokenData?.mintInfo?.mintContext?.blockNumber,
+            'latest' /* Clamp at next token block number if decrementing */
           )
           if (bids) {
             const auctionEventsArray = bids.map((event) => {
@@ -49,8 +49,6 @@ export default function TokenWinningBid({
                 transactionHash: event.transactionHash,
               }
             })
-            
-            console.log(auctionEventsArray)
 
             const tokenEvents = auctionEventsArray?.filter(token => token?.id === Number(tokenId))
 
