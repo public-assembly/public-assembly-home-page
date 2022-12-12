@@ -2,6 +2,7 @@ import React from 'react'
 import { useActiveAuction } from "../hooks/useActiveAuction"
 import CurrentAuction from './CurrentAuction'
 import TokenRenderer from './TokenRenderer'
+import CircleArrow from './CircleArrow'
 
 export interface TokenExplorerProps extends React.HTMLProps<HTMLDivElement> {
   /**
@@ -46,14 +47,25 @@ export default function TokenPagination({
   if (!totalSupply) return null
 
   return (
-    <div {...props}>
-      <button onClick={decrementId}>-</button>
-      {tokenId}
-      <button onClick={incrementId}>+</button>
+    <div {...props} className="flex flex-col gap-2">
       {tokenId === totalSupply - 1
         ? <>{auctionRenderer || <CurrentAuction daoAddress={daoAddress} />}</>
         : <TokenRenderer daoAddress={daoAddress} tokenId={tokenId?.toString()!} />
       }
+      <div className="flex flex-row gap-1">
+        <button
+          onClick={decrementId}
+          className={`${tokenId === 0 && 'pointer-events-none opacity-20'}`}
+        >
+          <CircleArrow direction="backward" />
+        </button>
+        <button
+          onClick={incrementId}
+          className={`${tokenId === totalSupply - 1 && 'pointer-events-none opacity-20'}`}
+        >
+          <CircleArrow />
+        </button>
+      </div>
     </div>
   )
 }
