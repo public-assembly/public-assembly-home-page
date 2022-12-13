@@ -1,13 +1,19 @@
 import gql from 'graphql-tag'
 
 export const DAO_TOKEN_QUERY = gql`
-  query NounishAuctions($collectionAddress: String!, $tokenId: String!) {
+  query NounishAuctions($daoAddress: String!, $tokenId: String!) {
     token(
-      token: {address: $collectionAddress, tokenId: $tokenId}
+      token: {address: $daoAddress, tokenId: $tokenId}
     ) {
       token {
-        description
         metadata
+        owner
+        lastRefreshTime
+        mintInfo {
+          mintContext {
+            blockNumber
+          }
+        }
       }
     }
   }
