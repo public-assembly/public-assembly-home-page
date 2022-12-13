@@ -6,10 +6,17 @@ import {
   useDaoToken,
 } from './hooks'
 
+import { 
+  shortenAddress,
+  zoraApiFetcher,
+} from './lib'
+
 export {
   CurrentAuction,
   TokenExplorer,
   useCountdown,
   useDaoAuctionQuery,
   useDaoToken,
+  shortenAddress,
+  zoraApiFetcher,
 }

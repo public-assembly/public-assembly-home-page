@@ -53,7 +53,7 @@ export default function CurrentAuction({daoAddress, ...props}: CurrentAuctionPro
             {auctionData?.endTime && <AuctionCountdown endTime={Number(auctionData.endTime)} />}
           </div>
           <span>
-            Bidder: {auctionData?.highestBidderENS}
+            Bidder: {auctionData?.highestBidder}
           </span>
         </div>
         <AuthCheck

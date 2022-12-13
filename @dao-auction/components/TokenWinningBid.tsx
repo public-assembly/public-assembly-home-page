@@ -3,6 +3,7 @@ import { useDaoToken } from "@dao-auction/hooks/useDaoToken"
 import { useNounsProtocol } from '@dao-auction/hooks/useNounsProtocol'
 import { useActiveAuction } from '@dao-auction/hooks/useActiveAuction'
 import { ethers } from 'ethers'
+import { etherscanLink } from '../lib'
 
 export default function TokenWinningBid({
   tokenId,
@@ -25,6 +26,7 @@ export default function TokenWinningBid({
   } = useNounsProtocol({daoAddress: daoAddress, auctionAddress: auctionData?.address})
 
   const [winningBid, setWinningBid] = React.useState<string | undefined>('N/A')
+  const [winningTx, setWinningTx] = React.useState<string | undefined>()
 
   React.useEffect(() => {
     async function getBids() {
@@ -55,23 +57,25 @@ export default function TokenWinningBid({
             if (tokenEvents?.length) {
               const lastTokenEvent = tokenEvents.at(-1)
               setWinningBid(`${lastTokenEvent?.amount} ETH`)
+              setWinningTx(etherscanLink({ hash: lastTokenEvent?.transactionHash }))
             } else {
               setWinningBid('N/A')
+              setWinningTx(undefined)
             }
           }
         }
       } catch (err) {
-        /**
-         * Short circuit the async call:
-         * https://stackoverflow.com/questions/37624144/is-there-a-way-to-short-circuit-async-await-flow
-         */
-        console.error(err)
+        // console.error(err)
       }
     }
     getBids()
     
     return function cleanup() {
-      console.log('unmount')
+      /**
+       * Short circuit the async call:
+       * https://stackoverflow.com/questions/37624144/is-there-a-way-to-short-circuit-async-await-flow
+       */
+      // console.log('unmount')
     }
   }, [BuilderAuction, tokenId, tokenData])
   
@@ -83,9 +87,14 @@ export default function TokenWinningBid({
       className="flex flex-col leading-5"
     >
       <span className="opacity-50">Winning bid:</span>
-      <span className="hover:underline">
+      <a
+        href={winningTx}
+        target="_blank"
+        rel="noreferrer"
+        className={`${!winningTx && 'pointer-events-none'} hover:underline`}
+      >
         {winningBid}
-      </span>
+      </a>
     </a>
   )
 }

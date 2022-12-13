@@ -19,7 +19,7 @@ export function useDaoAuctionQuery({
   )
 
   return {
-    activeAuction,
+    activeAuction: activeAuction?.nouns?.nounsActiveMarket,
     error,
   }
 }

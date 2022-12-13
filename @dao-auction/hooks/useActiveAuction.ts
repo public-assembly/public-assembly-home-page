@@ -3,6 +3,7 @@ import { useDaoAuctionQuery } from './useDaoAuctionQuery'
 import { BigNumber as EthersBN, ContractTransaction } from 'ethers'
 import { parseUnits } from '@ethersproject/units'
 import { useEnsName } from "wagmi"
+import { useBidder } from './useBidder'
 import { useNounsProtocol } from './useNounsProtocol'
 
 export function useActiveAuction(
@@ -13,43 +14,42 @@ export function useActiveAuction(
 ) {
   const { activeAuction } = useDaoAuctionQuery({ collectionAddress: daoAddress })
   
-  const { data: ensName } = useEnsName({
-    address: activeAuction?.nouns?.nounsActiveMarket?.highestBidder as string | undefined,
-  })
+  const { bidder } = useBidder(activeAuction?.highestBidder as string)
 
-  const auctionData = React.useMemo(() => {
-    const data = activeAuction?.nouns?.nounsActiveMarket
-
-    const minBidAmount = () => {
-      if (data?.highestBidPrice?.chainTokenPrice?.decimal && data?.minBidIncrementPercentage) {
-        const minBidValue =
-          ((data.highestBidPrice.chainTokenPrice.decimal * (data.minBidIncrementPercentage / 100))
-            + data.highestBidPrice.chainTokenPrice.decimal)
-        return minBidValue
-      } else {
-        /* @ts-ignore */
-        return data?.reservePrice?.chainTokenPrice?.decimal as number
-      }
-    }
-
-    return {
-      tokenId: data?.tokenId,
-      address: data?.address,
-      metadata: data?.metadata,
-      duration: data?.duration,
-      endTime: data?.endTime,
-      highestBidder: data?.highestBidder,
-      highestBidderENS: ensName || data?.highestBidder,
-      highestBidPrice: data?.highestBidPrice?.chainTokenPrice?.decimal,
-      highestBidPriceRaw: data?.highestBidPrice?.chainTokenPrice?.raw,
-      minBidIncrement: data?.minBidIncrementPercentage,
-      minBidAmount: minBidAmount(),
+  const minBidAmount = React.useMemo(() => {
+    if (activeAuction?.highestBidPrice?.chainTokenPrice?.decimal && activeAuction?.minBidIncrementPercentage) {
+      const minBidValue =
+        ((activeAuction?.highestBidPrice.chainTokenPrice.decimal * (activeAuction?.minBidIncrementPercentage / 100))
+          + activeAuction?.highestBidPrice.chainTokenPrice.decimal)
+      return minBidValue
+    } else {
       /* @ts-ignore */
-      reservePrice: data?.reservePrice?.chainTokenPrice?.raw,
+      return activeAuction?.reservePrice?.chainTokenPrice?.decimal as number
+    }
+  }, [activeAuction?.highestBidPrice?.chainTokenPrice?.decimal])
+
+  /**
+   * Fetch all of this directly from contract
+   */
+  const auctionData = React.useMemo(() => {
+    return {
+      tokenId: activeAuction?.tokenId,
+      address: activeAuction?.address,
+      metadata: activeAuction?.metadata,
+      duration: activeAuction?.duration,
+      endTime: activeAuction?.endTime,
+      highestBidder: bidder,
+      highestBidPrice: activeAuction?.highestBidPrice?.chainTokenPrice?.decimal,
+      highestBidPriceRaw: activeAuction?.highestBidPrice?.chainTokenPrice?.raw,
+      minBidIncrement: activeAuction?.minBidIncrementPercentage,
+      minBidAmount: minBidAmount,
+      /* @ts-ignore */
+      reservePrice: activeAuction?.reservePrice?.chainTokenPrice?.raw,
     }
   }, [
     activeAuction,
-    activeAuction?.nouns?.nounsActiveMarket?.highestBidPrice?.chainTokenPrice?.decimal
+    bidder,
+    minBidAmount,
   ])
 
   const { BuilderAuction, BuilderToken} = useNounsProtocol({
