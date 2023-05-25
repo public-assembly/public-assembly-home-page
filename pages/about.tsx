@@ -84,6 +84,11 @@ const READING_LIST_LINKS = [
    title: 'Docs',
    url: 'https://docs.public---assembly.com/',
    description: "User documentation"   
+  },
+  {
+   title: 'PATH',
+   url: 'https://zora.co/collect/0xea5f9d9891318f7aafa808044a7b8ed5e88ec0b4',
+   description: "Public Assembly Townhall"   
   }
  ] as ExternalCard[] 
 
