@@ -60,8 +60,8 @@ const READING_LIST_LINKS = [
 
  const ECOSYSTEM_CARDS = [
   {
-   title: 'Forum',
-   url: 'https://forum.public---assembly.com/',
+   title: 'Discord',
+   url: 'https://discord.gg/CRTpshFv',
    description: "Community hub 1"
   },
   {
@@ -80,11 +80,11 @@ const READING_LIST_LINKS = [
    url: 'https://github.com/public-assembly',
    description: "PA codebase"   
   },
-  {
-   title: 'Docs',
-   url: 'https://docs.public---assembly.com/',
-   description: "User documentation"   
-  },
+  // {
+  //  title: 'Docs',
+  //  url: 'https://docs.public---assembly.com/',
+  //  description: "User documentation"   
+  // },
   {
    title: 'PATH',
    url: 'https://zora.co/collect/0xea5f9d9891318f7aafa808044a7b8ed5e88ec0b4',
